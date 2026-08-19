@@ -5,15 +5,17 @@ require("controller.php");
 require("function.php");
 require("function_all.php");
 require('function_sranking.php');
-require('settings.php');
 require('function_redis.php');
+
+mysqli_report(MYSQLI_REPORT_OFF);
+$mysqli = @new mysqli(BOOM_DHOST, BOOM_DUSER, BOOM_DPASS, BOOM_DNAME);
+
+require('settings.php');
 
 if(checkRateLimit()){
 	die();
 }
 
-mysqli_report(MYSQLI_REPORT_OFF);
-$mysqli = @new mysqli(BOOM_DHOST, BOOM_DUSER, BOOM_DPASS, BOOM_DNAME);
 if (mysqli_connect_errno() || BOOM_INSTALL != 1) {
 	if(BOOM_INSTALL != 1){
 		$chat_install = 2;
